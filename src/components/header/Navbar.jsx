@@ -3,9 +3,10 @@ import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Profile from "./Profile";
+import { FaBell } from "react-icons/fa";
 
 const Navbar = () => {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "ligth");
     const handleToggle = (e) => {
      if(e.target.checked) {
          setTheme("dark");
@@ -24,13 +25,12 @@ const Navbar = () => {
  
     const Navlink = <>
        <li className=" font-semibold"><NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Home</NavLink></li>
-       <li className=" font-semibold"><NavLink to="/register" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>DASHBOARD</NavLink></li>
        <li className=" font-semibold"><NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
        <li>
         <Link>
-        <div className="indicatorm mt-3 lg:mt-0">
-            <span className="indicator-item badge badge-secondary">99+</span> 
-            <button className="btn">inbox</button>
+        <div className="indicatorm mt-2 lg:-mt-3">
+            <span className="indicator-item badge badge-secondary">9</span> 
+            <FaBell className="w-5 h-5"/>
             </div>
         </Link>
        </li>
@@ -38,7 +38,7 @@ const Navbar = () => {
 
 return (
     <div>
-         <div className="navbar bg-base-100 shadow-lg">
+         <div className="navbar bg-base-100 shadow-lg mb-8">
         <div className="navbar-start">
             <div className="dropdown lg:hidden">
             <label tabIndex={0} className="btn btn-ghost btn-circle">

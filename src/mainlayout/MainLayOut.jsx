@@ -8,7 +8,7 @@ const MainLayOut = () => {
     const noHeaderFooter = location.pathname.includes('login') || 
     location.pathname.includes('register');
     return (
-        <div className="flex flex-col min-h-[100vh]">
+        <div className="container mx-auto flex flex-col min-h-[100vh]">
         <div className="flex-grow">
         { noHeaderFooter || <Navbar></Navbar>}
            <Outlet></Outlet>
