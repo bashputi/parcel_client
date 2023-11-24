@@ -1,4 +1,4 @@
-
+import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,6 +15,7 @@ import useAxiosPublic from '../hooks/useAxiosPublic';
 import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Google from './Google';
 
 
 // const defaultTheme = createTheme();
@@ -59,6 +60,7 @@ export default function Register() {
   return (
    
       <Container component="main" maxWidth="xs">
+        <Paper sx={{ px: '30px' }} elevation={16} >
         <CssBaseline />
         <Box
           sx={{
@@ -153,7 +155,8 @@ export default function Register() {
             </Grid>
           </Box>
         </Box>
-      
+      <Google></Google>
+      </Paper>
       </Container>
  
   );

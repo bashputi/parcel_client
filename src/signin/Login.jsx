@@ -5,15 +5,14 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useForm } from 'react-hook-form';
-import useAxiosPublic from '../hooks/useAxiosPublic';
 import useAuth from '../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import Google from './Google';
+import { Paper } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function Login() {
@@ -48,6 +47,7 @@ export default function Login() {
 
   return (
       <Container component="main" maxWidth="xs">
+        <Paper sx={{ px: '30px' }} elevation={16} >
         <CssBaseline />
         <Box
           sx={{
@@ -58,7 +58,7 @@ export default function Login() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <AccountCircleIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign In
@@ -106,7 +106,8 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-      
+      <Google />
+      </Paper>
       </Container>
  
   );
