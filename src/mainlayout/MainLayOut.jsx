@@ -1,17 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/header/Navbar";
 import Footer from "../components/Footer";
 
 
 const MainLayOut = () => {
+    const location = useLocation();
+    const noHeaderFooter = location.pathname.includes('login') || 
+    location.pathname.includes('register');
     return (
         <div className="flex flex-col min-h-[100vh]">
         <div className="flex-grow">
-        <Navbar></Navbar>
+        { noHeaderFooter || <Navbar></Navbar>}
            <Outlet></Outlet>
         </div>
            <div className="flex-shrink-0">
-           <Footer></Footer>
+           { noHeaderFooter || <Footer></Footer>}
            </div>
        </div>
     );

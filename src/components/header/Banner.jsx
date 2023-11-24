@@ -2,7 +2,7 @@
 const Banner = () => {
     return (
         <div>
-            banner
+           jhhhhhhhhhhhhhh
         </div>
     );
 };
