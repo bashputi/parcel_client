@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Profile from "./Profile";
 import { FaBell } from "react-icons/fa";
+import useBook from "../../hooks/useBook";
 
 const Navbar = () => {
+  const [ books ] = useBook();
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
     const handleToggle = (e) => {
      if(e.target.checked) {
@@ -25,11 +27,11 @@ const Navbar = () => {
  
     const Navlink = <>
        <li className=" font-semibold"><NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Home</NavLink></li>
-       <li className=" font-semibold"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
+       <li className=" font-semibold"><NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
        <li>
         <Link>
         <div className="indicatorm mt-2 lg:-mt-3">
-            <span className="indicator-item badge badge-secondary">9</span> 
+            <span className="indicator-item badge badge-secondary">{books.length}</span> 
             <FaBell className="w-5 h-5"/>
             </div>
         </Link>

@@ -15,6 +15,9 @@ import Myparcel from "../pages/user/Myparcel";
 import MyProfile from "../pages/user/MyProfile";
 import MyDeliveryList from "../pages/deliveryman/MyDeliveryList";
 import MyReview from "../pages/deliveryman/MyReview";
+import UpdateItem from "../pages/user/UpdateItem";
+import Payment from "../pages/user/Payment";
+import PaymentSuccess from "../pages/user/PaymentSuccess";
 
 
 
@@ -66,8 +69,22 @@ const myRouter = createBrowserRouter([
             },
             {
                path: 'myparcel' ,
-               element: <Myparcel></Myparcel>
+               element: <Myparcel></Myparcel>,
+               
             },
+            {
+               path: 'updateItem/:id',
+               element: <UpdateItem></UpdateItem>,
+               loader: ({params}) => fetch(`http://localhost:5002/books/${params.id}`)
+            },
+            {
+               path: 'payment',
+               element: <Payment></Payment>
+             },
+             {
+               path: 'payment/paymentsuccess',
+               element: <PaymentSuccess></PaymentSuccess>
+             },
             {
                path: 'profile' ,
                element: <MyProfile></MyProfile>

@@ -55,11 +55,10 @@ const Bookparcel = () => {
         data.weight = isNaN(parsedWeight) ? 0 : parsedWeight;
         data.price = calculatedPrice;
 
-        console.log(data);
-        
           const bookItem = {
             address: data.address,
             date: data.date,
+            time: new Date(),
             email: data.email,
             latitude: data.latitude,
             longitude: data.longitude,
@@ -72,8 +71,8 @@ const Bookparcel = () => {
             weight: data.weigth,
             status: 'pending'
           }
-          console.log(bookItem)
-         axiosPublic.post('/book', bookItem)
+        
+         axiosPublic.post('/books', bookItem)
          .then(res => {
             if(res.data.insertedId){
               reset();

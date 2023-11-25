@@ -1,16 +1,16 @@
-import useCart from '../../hooks/useCart';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import SectionTitle from '../../components/SectionTitle'
+import useBook from '../../hooks/useBook';
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 
 const Myparcel = () => {
-    const [cart, refetch] = useCart();
-    const axiosSecure = useAxiosSecure();
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+        const axiosSecure = useAxiosSecure();
+        const [book, refetch] = useBook();
+     const totalPrice = book.reduce((total, item) => total + item.price, 0);
 
-    const handleDelete = id => {
+     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -20,8 +20,9 @@ const Myparcel = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
+            
             if (result.isConfirmed) {
-            axiosSecure.delete(`/carts/${id}`)
+            axiosSecure.delete(`/books/${id}`)
             .then(res => {
                 if(res.data.deletedCount > 0){
                     refetch();
@@ -35,15 +36,15 @@ const Myparcel = () => {
             }
           });
     };
-
+     
     return (
         <div>
-             <SectionTitle heading="My Parcel" subHeading="Track your parcel"></SectionTitle>
-             <div className="flex justify-evenly mb-8">
-        <h2 className="text-4xl">Item: {cart.length}</h2>
+           
+      <div className="flex justify-evenly mt-12 mb-8">
+        <h2 className="text-4xl">Item: {book.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
-        cart.length ? <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
+        book.length ? <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
         :  <button disabled className="btn btn-primary">Pay</button>
        }
       </div>
@@ -57,42 +58,60 @@ const Myparcel = () => {
                   <input type="checkbox" className="checkbox" />
                 </label>
               </th>
-              <th>Image</th>
-              <th>Name</th>
+              <th>Type</th>
+              <th>Requested Date</th>
+              <th>Aproximate Date</th>
+              <th>Booking Date</th>
+              <th>Delivery Man Id</th>
+              <th>Review</th>
+              <th>Update</th>
+              <th>Cancel</th>
+              <th>Status</th>
               <th>Price</th>
-              <th>Action</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             {/* row  */}
            {
-            cart.map((item, index) => (
+            book.map((item, index) => (
                 <tr key={item._id}>
                 <th>
                  {index + 1}
                 </th>
                 <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={item.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
-                    
-                  </div>
+                  {item.type}
                 </td>
                 <td>
-                  {item.name}
+                  {item.date}
                
                 </td>
-                <td>$ {item.price}</td>
-                <th>
-                  <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btb-lg"><FaTrashAlt /></button>
-                </th>
+                <td>
+                    {/* aproximate date  */}
+                </td>
+                <td>
+                    {item.time}
+                </td>
+                <td>
+                    {/* deliveryman id  */}
+                  
+                </td>
+                <td>
+                   <button className='btn btn-success'>Review</button>
+                </td>
+                <td>
+                <Link to={`/dashboard/updateItem/${item._id}`}>
+                    <button className='btn btn-warning'><FaEdit /></button>
+                    </Link>
+                </td>
+                <td>
+                <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btb-lg"><FaTrashAlt className='text-red-600 w-5 h-5'/></button>
+                </td>
+                <td>
+                {item.status}
+                </td>
+                <td>
+                    {item.price}
+                </td>
               </tr>
             ))
            }
@@ -101,7 +120,7 @@ const Myparcel = () => {
          
         </table>
       </div>
-        </div>
+    </div>
     );
 };
 

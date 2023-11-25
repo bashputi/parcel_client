@@ -1,9 +1,10 @@
+import SectionTitle from "../../components/SectionTitle";
 
 
 const MyProfile = () => {
     return (
         <div>
-            import React from ;
+            <SectionTitle heading={'My Profile' } subHeading={''}></SectionTitle>
         </div>
     );
 };

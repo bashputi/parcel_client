@@ -1,10 +1,16 @@
 import { useState } from "react";
-// import useRole from "../hooks/useRole";
+import { MdReviews } from "react-icons/md";
 import Logo from "../components/header/Logo";
 import { AiOutlineBars } from 'react-icons/ai'
 import { NavLink } from "react-router-dom";
-
-
+import { GoGraph } from "react-icons/go";
+import { FaUserGroup } from "react-icons/fa6";
+import { FaBoxes } from "react-icons/fa";
+import { GrUserWorker } from "react-icons/gr";
+import { FaBookmark } from "react-icons/fa6";
+import { FaBox } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { FaClipboardList } from "react-icons/fa"
 
 const Sidebar = () => {
   
@@ -52,51 +58,51 @@ const Sidebar = () => {
                     {/* admin route  */}
                 <li>
                     <NavLink to="/dashboard/adminhome">
-                    Statistics
+                    <GoGraph /> Statistics
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/allusers">
-                    All Users
+                    <FaUserGroup /> All Users
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/allparcel">
-                    All Parcels
+                    <FaBoxes /> All Parcels
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/deliveryman">
-                    All Delivery Man
+                    <GrUserWorker /> All Delivery Man
                     </NavLink>
                 </li>
                 
                 {/* user route  */}
                 <li>
                     <NavLink to="/dashboard/bookparcel">
-                    Book a parcel
+                    <FaBookmark /> Book a parcel
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/myparcel">
-                    my parcel
+                    <FaBox /> my parcel
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/profile">
-                    my profile
+                    <CgProfile /> my profile
                     </NavLink>
                 </li>
                 
                 {/* deliveryman route  */}
                 <li>
                     <NavLink to="/dashboard/mydeliverylist">
-                    my Delivery list
+                    <FaClipboardList /> my Delivery list
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard/myreview">
-                    my reviews
+                    <MdReviews /> my reviews
                     </NavLink>
                 </li>
                 </ul>
