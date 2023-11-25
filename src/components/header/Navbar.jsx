@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import { FaBell } from "react-icons/fa";
 
 const Navbar = () => {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "ligth");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
     const handleToggle = (e) => {
      if(e.target.checked) {
          setTheme("dark");
@@ -25,7 +25,7 @@ const Navbar = () => {
  
     const Navlink = <>
        <li className=" font-semibold"><NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Home</NavLink></li>
-       <li className=" font-semibold"><NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
+       <li className=" font-semibold"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
        <li>
         <Link>
         <div className="indicatorm mt-2 lg:-mt-3">

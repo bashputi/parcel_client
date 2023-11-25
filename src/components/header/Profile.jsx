@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import auth from "../../firebase/firebase.config";
 import useAuth from "../../hooks/useAuth";
+import { GrLogout } from 'react-icons/gr'
 
 
 const Profile = () => {
@@ -26,7 +27,7 @@ const Profile = () => {
                 <div className="my-4 text-center font-semibold text-lg text-green-600 pl-2.5">{user.displayName}</div>
                 
                 <Link to="/dashboard" ><button className="btn btn-ghost lg:text-lg ml-12 font-semibold">Dashboard</button></Link>
-                <button onClick={handleLogOut} className="btn btn-ghost lg:text-lg font-semibold">LogOut</button>
+                <button onClick={handleLogOut} className="btn btn-ghost lg:text-lg font-semibold"><GrLogout className='w-5 h-5' />LogOut</button>
                
 
             </ul>

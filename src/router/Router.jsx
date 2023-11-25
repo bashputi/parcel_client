@@ -6,6 +6,15 @@ import Login from "../signin/Login";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "../../src/router/PrivateRoute";
+import Adminhome from "../pages/Admin/Adminhome";
+import Deliveryman from "../pages/Admin/Deliveryman";
+import Allparcel from "../pages/Admin/Allparcel";
+import Allusers from "../pages/Admin/Allusers";
+import Bookparcel from "../pages/user/Bookparcel";
+import Myparcel from "../pages/user/Myparcel";
+import MyProfile from "../pages/user/MyProfile";
+import MyDeliveryList from "../pages/deliveryman/MyDeliveryList";
+import MyReview from "../pages/deliveryman/MyReview";
 
 
 
@@ -33,7 +42,45 @@ const myRouter = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+               path: 'adminhome' ,
+               element: <Adminhome></Adminhome>
+            },
+            {
+               path: 'allusers' ,
+               element: <Allusers></Allusers>
+            },
+            {
+               path: 'allparcel' ,
+               element: <Allparcel></Allparcel>
+            },
+            {
+               path: 'deliveryman' ,
+               element: <Deliveryman></Deliveryman>
+            },
+            {
+               path: 'bookparcel' ,
+               element: <Bookparcel></Bookparcel>
+            },
+            {
+               path: 'myparcel' ,
+               element: <Myparcel></Myparcel>
+            },
+            {
+               path: 'profile' ,
+               element: <MyProfile></MyProfile>
+            },
+            {
+               path: 'mydeliverylist' ,
+               element: <MyDeliveryList></MyDeliveryList>
+            },
+            {
+               path: 'myreview' ,
+               element: <MyReview></MyReview>
+            },
+        ]
     }
 ])
 
