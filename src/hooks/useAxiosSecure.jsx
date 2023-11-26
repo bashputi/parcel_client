@@ -7,31 +7,30 @@ const axiosSecure = axios.create({
 });
 
 const useAxiosSecure = () => {
-    const navigate = useNavigate();
-    const { logOut } = useAuth();
+  const navigate = useNavigate();
+  const { logOut } = useAuth();
 
-    axiosSecure.interceptors.response.use(
-        function (response) {
-          return response;
-        },
-        async function (error) {
-          if (error.response) {
-            const status = error.response.status;
-            console.log('status error in the interceptor', status);
-            if (status === 401 || status === 403) {
-              await logOut();
-              navigate('/login');
-            }
-          } else {
-            console.log('Error occurred, but no response received.');
-         
-          }
-          return Promise.reject(error);
-        }
-      );
-      
+  axiosSecure.interceptors.request.use(function (config) {
+      const token = localStorage.getItem('access-token');
+      config.headers.authorization = `Bearer ${token}`;
+      return config;
+  }, function (error) {
+      return Promise.reject(error);
+  }
+  );
+  axiosSecure.interceptors.response.use(function (response) {
+      return response;
+  }, async(error) => {
+      const status = error.response.status ;
+      if(status === 401 || status === 403){
+          await logOut();
+          navigate('/login')
+      }
+        return Promise.reject(error)  ;
+  })
 
-    return axiosSecure;
+
+  return axiosSecure;
 };
 
 export default useAxiosSecure;

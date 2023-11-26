@@ -11,12 +11,13 @@ import { FaBookmark } from "react-icons/fa6";
 import { FaBox } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa"
+import useAdmin from "../hooks/useAdmin";
+
 
 const Sidebar = () => {
-  
     const [isActive, setActive] = useState(false);
-    // const [role] = useRole();
-
+    const [isAdmin, isDeliveryman] = useAdmin();
+  
     // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
@@ -52,11 +53,12 @@ const Sidebar = () => {
               </div>
             </div>
             <hr />
-  
             <div>
                 <ul className="menu font-semibold lg:text-lg  uppercase">
-                    {/* admin route  */}
-                <li>
+           {/* {
+            isAdmin && <> */}
+            
+            <li>
                     <NavLink to="/dashboard/adminhome">
                     <GoGraph /> Statistics
                     </NavLink>
@@ -76,9 +78,15 @@ const Sidebar = () => {
                     <GrUserWorker /> All Delivery Man
                     </NavLink>
                 </li>
-                
-                {/* user route  */}
-                <li>
+
+            {/* </>
+          }
+          
+            {
+              !isAdmin && !isDeliveryman &&
+              <>
+               */}
+            <li>
                     <NavLink to="/dashboard/bookparcel">
                     <FaBookmark /> Book a parcel
                     </NavLink>
@@ -93,9 +101,13 @@ const Sidebar = () => {
                     <CgProfile /> my profile
                     </NavLink>
                 </li>
-                
-                {/* deliveryman route  */}
-                <li>
+              {/* </>
+            }
+           
+                {
+                  isDeliveryman && <> */}
+                  
+                  <li>
                     <NavLink to="/dashboard/mydeliverylist">
                     <FaClipboardList /> my Delivery list
                     </NavLink>
@@ -105,6 +117,10 @@ const Sidebar = () => {
                     <MdReviews /> my reviews
                     </NavLink>
                 </li>
+
+                  {/* </>
+                }
+              */}
                 </ul>
             </div>
           

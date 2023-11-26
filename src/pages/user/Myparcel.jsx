@@ -55,9 +55,7 @@ const Myparcel = () => {
           <thead>
             <tr>
               <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
+                Serial No
               </th>
               <th>Type</th>
               <th>Requested Date</th>

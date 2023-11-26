@@ -46,7 +46,8 @@ console.log(formData)
             const userInfo = {
                 name: formData.name,
                 email: formData.email,
-                role: formData.role
+                role: formData.role,
+                phn: formData.phn
               }
               axiosPublic.post('/users', userInfo)
               .then(res => {
@@ -101,6 +102,19 @@ console.log(formData)
                   {...register("name", { required: "Name is required"})}
                   error={Boolean(errors.name)}
                   helperText={errors.name?.message}
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  required
+                  fullWidth
+                  id="phn"
+                  label="Phone No"
+                  name="phn"
+                  autoComplete="phone-no"
+                  {...register("phn", { required: "Phone no is required"})}
+                  error={Boolean(errors.phn)}
+                  helperText={errors.phn?.message}
                 />
               </Grid>
               <Grid item xs={12}>

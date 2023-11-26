@@ -55,10 +55,17 @@ const Bookparcel = () => {
         data.weight = isNaN(parsedWeight) ? 0 : parsedWeight;
         data.price = calculatedPrice;
 
+        const currentDate = new Date(); 
+        const year = currentDate.getFullYear(); 
+        let month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
+        let day = String(currentDate.getDate()).padStart(2, '0'); 
+
+          const formattedDate = `${year}-${month}-${day}`;
+
           const bookItem = {
             address: data.address,
             date: data.date,
-            time: new Date(),
+            time: formattedDate,
             email: data.email,
             latitude: data.latitude,
             longitude: data.longitude,
@@ -89,10 +96,10 @@ const Bookparcel = () => {
       };
 
     return (
-        <div className=''>
+        <div className='my-10'>
           
            <SectionTitle heading="book a parcel" subHeading="What's new?"></SectionTitle>
-            <div>
+            <div className='mt-12 bg-lime-200 shadow-lg rounded-lg p-5'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control w-full my-6">
             <label className="label">

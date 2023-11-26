@@ -18,6 +18,7 @@ import MyReview from "../pages/deliveryman/MyReview";
 import UpdateItem from "../pages/user/UpdateItem";
 import Payment from "../pages/user/Payment";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -53,11 +54,13 @@ const myRouter = createBrowserRouter([
             },
             {
                path: 'allusers' ,
-               element: <Allusers></Allusers>
+               element: <Allusers></Allusers>,
+               loader: () => fetch('http://localhost:5002/users')
             },
             {
                path: 'allparcel' ,
-               element: <Allparcel></Allparcel>
+               element: <Allparcel></Allparcel>,
+               loader: () => fetch('http://localhost:5002/books')
             },
             {
                path: 'deliveryman' ,
