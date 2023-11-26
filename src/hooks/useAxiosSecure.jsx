@@ -24,8 +24,7 @@ const useAxiosSecure = () => {
             }
           } else {
             console.log('Error occurred, but no response received.');
-            // Handle the situation when error.response is unavailable
-            // This might include showing an error message to the user or retrying the request.
+         
           }
           return Promise.reject(error);
         }

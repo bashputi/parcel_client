@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const Myparcel = () => {
         const axiosSecure = useAxiosSecure();
         const [book, refetch] = useBook();
+        console.log(book)
      const totalPrice = book.reduce((total, item) => total + item.price, 0);
 
      const handleDelete = id => {

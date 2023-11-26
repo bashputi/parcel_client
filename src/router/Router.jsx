@@ -87,7 +87,8 @@ const myRouter = createBrowserRouter([
              },
             {
                path: 'profile' ,
-               element: <MyProfile></MyProfile>
+               element: <MyProfile></MyProfile>,
+               
             },
             {
                path: 'mydeliverylist' ,
