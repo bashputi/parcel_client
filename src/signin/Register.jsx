@@ -16,26 +16,37 @@ import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Google from './Google';
+import { MenuItem } from '@mui/material';
+import { useState } from 'react';
 
 
 // const defaultTheme = createTheme();
 
 export default function Register() {
+  const [role, setRole] = useState('');
     const axiosPublic = useAxiosPublic();
     const { signUp, handleUpdateProfile } = useAuth();
     const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: {errors}} = useForm();
-  const onSubmit = (data) => {
 
-    signUp(data.email, data.password)
+    const handleRoleChange = (event) => {
+      setRole(event.target.value);
+      console.log(event.target.value)
+  };
+
+  const onSubmit = (data) => {
+    const formData = { ...data, role };
+console.log(formData)
+    signUp(formData.email, formData.password)
      .then(res => {
         const loggedUser = res.user;
         console.log(loggedUser);
         handleUpdateProfile(data.name, data.photoURL)
         .then(() => {
             const userInfo = {
-                name: data.name,
-                email: data.email
+                name: formData.name,
+                email: formData.email,
+                role: formData.role
               }
               axiosPublic.post('/users', userInfo)
               .then(res => {
@@ -136,6 +147,22 @@ export default function Register() {
                   helperText={errors.imageUrl?.message}
                 />
               </Grid>
+              <Grid item xs={12}>
+              <TextField
+                  required
+                  fullWidth
+                  name="role"
+                  label="Sign in As"
+                  type="text"
+                  id="role"
+                  autoComplete="role"
+                  value={role}
+                  onChange={handleRoleChange}
+                  select>
+                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="deliveryman">Delivery man</MenuItem>
+                </TextField>
+               </Grid>
         
             </Grid>
             <Button

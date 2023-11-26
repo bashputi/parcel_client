@@ -5,7 +5,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useProfile from "../../hooks/useProfile";
 import useAuth from "../../hooks/useAuth";
-import { useLoaderData } from "react-router-dom";
+import useBook from "../../hooks/useBook";
+
 
 
 // other imports...
@@ -16,6 +17,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const MyProfile = () => {
 
     const inputRef = useRef(null);
+    const [book] = useBook();
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -38,14 +40,23 @@ const MyProfile = () => {
             };
             const res = await axiosPublic.post(image_hosting_api, formData, { headers });
             if (res.data.success) {
+              
                 const profileimage = {
                     image: res.data.data.display_url,
                     email: user.email
                 }
                 const profileRes = await axiosSecure.post('/profiles', profileimage);
                 if (profileRes.data.insertedId) {
+                    Swal.fire({
+                        position: "top-left",
+                        icon: "success",
+                        title: " Profile Picture Upload successful!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     refetch();
                     setUploadedImage(res.data.data.display_url); 
+                  
                 }
             }
         } catch (error) {
@@ -71,8 +82,24 @@ const MyProfile = () => {
                 console.log(updateData)
                 axiosPublic.patch(`/profiles/${profile[0]._id}`, updateData)
                 .then(res => {
-                    setUploadedImage(res.data.data.display_url); 
+                    console.log(res)
+                    if(res.data.modifiedCount > 0){
+                        Swal.fire({
+                            position: "top-left",
+                            icon: "success",
+                            title: "Profile picture updated successfully!!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch();
+                        setUploadedImage(res.data.data.display_url); 
+                      
+                    }
+                    
                 })
+                .catch(error => {
+                    console.error("Error updating image:", error);
+                });
               
             }
         } catch (error) {
@@ -119,6 +146,12 @@ const MyProfile = () => {
                         </div>
                     )}
                 </div>
+            </div>
+            <div className="mt-12 text-center">
+                <h1 className="mb-4 text-2xl font-bold text-gray-800">{user?.displayName}</h1>
+                <p className="text-gray-600 text-lg">{user.email}</p>
+                <p className="text-green-600 text-lg font-bold">Your Booking: {book.length}</p>
+                
             </div>
         </div>
     );
