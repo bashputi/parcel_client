@@ -31,14 +31,28 @@ const Allusers = () => {
       }
      })
   };
+  const handleMakeDeliveryMan = user => {
+    axiosSecure.patch(`/users/deliveryman/${user._id}`)
+     .then(res => {
+      console.log(res.data)
+      if(res.data.modifiedCount > 0){
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Delivery Man Now!`,
+          showConfirmButton: false,
+          timer: 1500
+      });
+      }
+     })
+  };
 
 
     return (
         <div className="mb-10">
-           
         <div className="flex justify-evenly mt-12 mb-8">
        <div>
-      
        <h1 className="text-4xl font-semibold text-gray-700">All User</h1>
        <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {users.length}</h2>
        </div>
@@ -83,7 +97,7 @@ const Allusers = () => {
                   </td>
   
                   <td>
-                      <button className="btn btn-outline btn-success">Delivery man</button>
+                  { user.role === 'deliveryman' ? <button className="btn btn-outline btn-warning">Delivery Man</button> : <button onClick={() => handleMakeDeliveryMan(user)} className="btn bg-orange-500 btn-lg"><FaUsers className="text-white text-2xl" /></button>}
                   </td>
                   <td>
                   { user.role === 'admin' ? <button className="btn btn-outline btn-warning">Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 btn-lg"><FaUsers className="text-white text-2xl" /></button>}
