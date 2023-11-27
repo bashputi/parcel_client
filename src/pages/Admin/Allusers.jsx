@@ -1,10 +1,37 @@
-import {  useLoaderData } from "react-router-dom";
-import { useState } from "react";
+// import {  useLoaderData } from "react-router-dom";
+// import { useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { FaUsers } from "react-icons/fa";
 
 
 const Allusers = () => {
-    const userData = useLoaderData();
-    const [users, setUsers] = useState(userData);
+  const axiosSecure = useAxiosSecure();
+  const {data: users = [], refetch} = useQuery({
+      queryKey: ['users'],
+      queryFn: async () => {
+          const res = await axiosSecure.get('/users');
+          return res.data;
+      }
+  });
+  const handleMakeAdmin = user => {
+    axiosSecure.patch(`/users/admin/${user._id}`)
+     .then(res => {
+      console.log(res.data)
+      if(res.data.modifiedCount > 0){
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500
+      });
+      }
+     })
+  };
+
 
     return (
         <div className="mb-10">
@@ -35,16 +62,16 @@ const Allusers = () => {
             <tbody>
               {/* row  */}
              {
-              users.length && users.map((item, index) => (
-                  <tr key={item._id}>
+              users.length && users.map((user, index) => (
+                  <tr key={user._id}>
                   <th>
                    {index + 1}
                   </th>
                   <td>
-                    {item.name}
+                    {user.name}
                   </td>
                   <td>
-                    {item.phn}
+                    {user.phn}
                   </td>
 
                   <td>
@@ -59,7 +86,7 @@ const Allusers = () => {
                       <button className="btn btn-outline btn-success">Delivery man</button>
                   </td>
                   <td>
-                      <button className="btn btn-outline btn-warning">Admin</button>
+                  { user.role === 'admin' ? <button className="btn btn-outline btn-warning">Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 btn-lg"><FaUsers className="text-white text-2xl" /></button>}
                   </td>
                 </tr>
               ))

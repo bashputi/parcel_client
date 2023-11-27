@@ -55,12 +55,12 @@ const myRouter = createBrowserRouter([
             {
                path: 'allusers' ,
                element: <Allusers></Allusers>,
-               loader: () => fetch('http://localhost:5002/users')
+               
             },
             {
                path: 'allparcel' ,
                element: <Allparcel></Allparcel>,
-               loader: () => fetch('http://localhost:5002/books')
+              
             },
             {
                path: 'deliveryman' ,
@@ -73,7 +73,7 @@ const myRouter = createBrowserRouter([
             {
                path: 'myparcel' ,
                element: <Myparcel></Myparcel>,
-               
+               loader: () => fetch('http://localhost:5002/books')
             },
             {
                path: 'updateItem/:id',

@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 
 const Adminhome = () => {
   const [chartData, setChartData] = useState({});
+  
 
   useEffect(() => {
     fetch('http://localhost:5002/books')

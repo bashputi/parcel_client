@@ -2,14 +2,28 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useBook from '../../hooks/useBook';
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../AuthProvider';
 
 
 const Myparcel = () => {
         const axiosSecure = useAxiosSecure();
-        const [book, refetch] = useBook();
-        console.log(book)
-     const totalPrice = book.reduce((total, item) => total + item.price, 0);
+        // const [book, refetch] = useBook();
+        const loadedMyOrder = useLoaderData();
+        const [updateUser, setUpdateUser] = useState(loadedMyOrder);
+        const {user, loading} = useContext(AuthContext);
+        
+        useEffect(() => {
+          if (loadedMyOrder && user?.email) {
+            const filterCard = loadedMyOrder.filter((item) => item.email === user.email);
+            setUpdateUser(filterCard);
+          }
+        }, [loadedMyOrder, user?.email]);
+
+        
+     const totalPrice = updateUser.reduce((total, item) => total + item.price, 0);
 
      const handleDelete = id => {
         Swal.fire({
@@ -26,12 +40,14 @@ const Myparcel = () => {
             axiosSecure.delete(`/books/${id}`)
             .then(res => {
                 if(res.data.deletedCount > 0){
-                    refetch();
+                   
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
                         icon: "success"
                       });
+                      const remaining = updateUser.filter((item) => item._id !== id);
+              setUpdateUser(remaining)
                 }
             })
             }
@@ -42,10 +58,10 @@ const Myparcel = () => {
         <div>
            
       <div className="flex justify-evenly mt-12 mb-8">
-        <h2 className="text-4xl">Item: {book.length}</h2>
+        <h2 className="text-4xl">Item: {updateUser.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
-        book.length ? <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
+        updateUser.length ? <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
         :  <button disabled className="btn btn-primary">Pay</button>
        }
       </div>
@@ -72,7 +88,7 @@ const Myparcel = () => {
           <tbody>
             {/* row  */}
            {
-            book.map((item, index) => (
+            updateUser.length && updateUser.map((item, index) => (
                 <tr key={item._id}>
                 <th>
                  {index + 1}

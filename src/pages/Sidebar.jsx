@@ -16,7 +16,7 @@ import useAdmin from "../hooks/useAdmin";
 
 const Sidebar = () => {
     const [isActive, setActive] = useState(false);
-    const [isAdmin, isDeliveryman] = useAdmin();
+    const [isAdmin, isDeliveryman , isCommoner] = useAdmin();
   
     // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -55,8 +55,8 @@ const Sidebar = () => {
             <hr />
             <div>
                 <ul className="menu font-semibold lg:text-lg  uppercase">
-           {/* {
-            isAdmin && <> */}
+           {
+            isAdmin && <>
             
             <li>
                     <NavLink to="/dashboard/adminhome">
@@ -79,13 +79,13 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
 
-            {/* </>
+            </>
           }
           
             {
-              !isAdmin && !isDeliveryman &&
+              isCommoner &&
               <>
-               */}
+              
             <li>
                     <NavLink to="/dashboard/bookparcel">
                     <FaBookmark /> Book a parcel
@@ -101,11 +101,11 @@ const Sidebar = () => {
                     <CgProfile /> my profile
                     </NavLink>
                 </li>
-              {/* </>
+              </>
             }
            
                 {
-                  isDeliveryman && <> */}
+                  isDeliveryman && <>
                   
                   <li>
                     <NavLink to="/dashboard/mydeliverylist">
@@ -118,9 +118,9 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
 
-                  {/* </>
+                  </>
                 }
-              */}
+             
                 </ul>
             </div>
           

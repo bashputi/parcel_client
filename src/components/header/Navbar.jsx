@@ -5,9 +5,11 @@ import Logo from "./Logo";
 import Profile from "./Profile";
 import { FaBell } from "react-icons/fa";
 import useBook from "../../hooks/useBook";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const [ books ] = useBook();
+  const [isAdmin] = useAdmin();
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
     const handleToggle = (e) => {
      if(e.target.checked) {
@@ -29,7 +31,9 @@ const Navbar = () => {
        <li className=" font-semibold"><NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Home</NavLink></li>
        <li className=" font-semibold"><NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Login</NavLink></li>
        <li className=" font-semibold"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#d78131] font-semibold uppercase underline" : "" }>Dashboard</NavLink></li>
-       <li>
+     {
+      isAdmin && <> 
+        <li>
         <Link>
         <div className="indicatorm mt-2 lg:-mt-3">
             <span className="indicator-item badge badge-secondary">{books.length}</span> 
@@ -37,6 +41,8 @@ const Navbar = () => {
             </div>
         </Link>
        </li>
+      </>
+     }
   </>
 
 return (

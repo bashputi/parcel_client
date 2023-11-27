@@ -173,7 +173,7 @@ console.log(formData)
                   value={role}
                   onChange={handleRoleChange}
                   select>
-                <MenuItem value="user">User</MenuItem>
+                <MenuItem value="commoner">User</MenuItem>
                 <MenuItem value="deliveryman">Delivery man</MenuItem>
                 </TextField>
                </Grid>

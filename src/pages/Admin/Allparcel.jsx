@@ -1,19 +1,19 @@
-import { useState } from "react";
-import {  useLoaderData } from "react-router-dom";
+
+import useBook from "../../hooks/useBook";
 
 
 const Allparcel = () => {
-    const parcelData = useLoaderData();
-    const [parcel, setParcel] = useState(parcelData);
-  console.log(parcel)
+    // const parcelData = useLoaderData();
+    // const [parcel, setParcel] = useState(parcelData);
+    const [book] = useBook();
+  // console.log(book)
     return (
         <div>
-           
-      <div className="flex justify-evenly mt-12 mb-8">
+             <div className="flex justify-evenly mt-12 mb-8">
       <div>
       
       <h1 className="text-4xl font-semibold text-gray-700">All Ordered Parcel</h1>
-      <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {parcel.length}</h2>
+      <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {book.length}</h2>
       </div>
       </div>
       <div className="overflow-x-auto ">
@@ -38,7 +38,7 @@ const Allparcel = () => {
           <tbody>
             {/* row  */}
            {
-            parcel.length && parcel.map((item, index) => (
+            book.length && book.map((item, index) => (
                 <tr key={item._id}>
                 <th>
                  {index + 1}
@@ -76,6 +76,7 @@ const Allparcel = () => {
          
         </table>
       </div>
+    
     </div>
     );
 };
