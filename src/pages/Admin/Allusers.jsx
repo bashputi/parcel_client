@@ -1,60 +1,79 @@
-// import {  useLoaderData } from "react-router-dom";
-// import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { FaUsers } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 
 const Allusers = () => {
-  const axiosSecure = useAxiosSecure();
-  const {data: users = [], refetch} = useQuery({
-      queryKey: ['users'],
-      queryFn: async () => {
-          const res = await axiosSecure.get('/users');
-          return res.data;
-      }
-  });
-  const handleMakeAdmin = user => {
-    axiosSecure.patch(`/users/admin/${user._id}`)
-     .then(res => {
-      console.log(res.data)
-      if(res.data.modifiedCount > 0){
-        refetch();
+const axiosSecure = useAxiosSecure();
+const loadedUsers = useLoaderData();
+
+const [mans, setMans] = useState(loadedUsers)
+const count = loadedUsers.length ;
+const itemsPerPage = 5 ; 
+const numberOfPage = Math.ceil( count / itemsPerPage);
+const pages = [...Array(numberOfPage).keys()];
+const [currentPage, setCurrentPage] = useState(0);
+console.log(mans)
+useEffect(() => {
+  fetch(`http://localhost:5002/users?page=${currentPage}&size=${itemsPerPage}`)
+      .then(res => res.json())
+      .then(data => setMans(data))
+}, [currentPage]);
+
+
+const handleMakeAdmin = (user) => {
+  axiosSecure
+    .patch(`/users/admin/${user._id}`)
+    .then((res) => {
+      if (res.data.modifiedCount > 0) {
+        const updatedMans = mans.map((item) =>
+          item._id === user._id ? { ...item, role: 'admin' } : item
+        );
+        setMans(updatedMans);
         Swal.fire({
           position: "top-end",
           icon: "success",
           title: `${user.name} is an Admin Now!`,
           showConfirmButton: false,
-          timer: 1500
-      });
+          timer: 1500,
+        });
       }
-     })
-  };
-  const handleMakeDeliveryMan = user => {
-    axiosSecure.patch(`/users/deliveryman/${user._id}`)
-     .then(res => {
-      console.log(res.data)
-      if(res.data.modifiedCount > 0){
-        refetch();
+    })
+    .catch((error) => {
+      console.error("Error making admin:", error);
+    });
+};
+const handleMakeDeliveryMan = (user) => {
+  axiosSecure
+    .patch(`/users/deliveryman/${user._id}`)
+    .then((res) => {
+      if (res.data.modifiedCount > 0) {
+        const updatedMans = mans.map((item) =>
+          item._id === user._id ? { ...item, role: 'deliveryman' } : item
+        );
+        setMans(updatedMans);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${user.name} is an Delivery Man Now!`,
+          title: `${user.name} is a Delivery Man Now!`,
           showConfirmButton: false,
-          timer: 1500
-      });
+          timer: 1500,
+        });
       }
-     })
-  };
-
+    })
+    .catch((error) => {
+      console.error("Error making deliveryman:", error);
+    });
+};
 
     return (
         <div className="mb-10">
         <div className="flex justify-evenly mt-12 mb-8">
        <div>
        <h1 className="text-4xl font-semibold text-gray-700">All User</h1>
-       <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {users.length}</h2>
+       <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {mans.length}</h2>
        </div>
         </div>
         <div className="overflow-x-auto ">
@@ -76,7 +95,7 @@ const Allusers = () => {
             <tbody>
               {/* row  */}
              {
-              users.length && users.map((user, index) => (
+              mans.length && mans.map((user, index) => (
                   <tr key={user._id}>
                   <th>
                    {index + 1}
@@ -110,6 +129,14 @@ const Allusers = () => {
            
           </table>
         </div>
+        <div className="flex justify-center mt-16">
+             <div className="grid grid-cols-3 gap-6">
+                  
+               {
+                 pages.map(page => <button className={currentPage === page ? "btn btn-warning" : undefined} onClick={() => setCurrentPage(page)} key={page}>{page} </button>)
+            }
+             </div>
+                </div>
       </div>
     );
 };

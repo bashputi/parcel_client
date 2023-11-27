@@ -55,7 +55,7 @@ const myRouter = createBrowserRouter([
             {
                path: 'allusers' ,
                element: <Allusers></Allusers>,
-               
+               loader: () => fetch('http://localhost:5002/users')
             },
             {
                path: 'allparcel' ,
