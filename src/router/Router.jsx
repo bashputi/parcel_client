@@ -60,11 +60,13 @@ const myRouter = createBrowserRouter([
             {
                path: 'allparcel' ,
                element: <Allparcel></Allparcel>,
+               loader: () => fetch('http://localhost:5002/books')
               
             },
             {
                path: 'deliveryman' ,
-               element: <Deliveryman></Deliveryman>
+               element: <Deliveryman></Deliveryman>,
+               loader: () => fetch('http://localhost:5002/users')
             },
             {
                path: 'bookparcel' ,

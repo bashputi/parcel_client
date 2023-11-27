@@ -17,9 +17,9 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const MyProfile = () => {
 
     const inputRef = useRef(null);
-    const [book] = useBook();
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
+    console.log(user)
     const axiosSecure = useAxiosSecure();
     const [profile, refetch] = useProfile();
     const [uploadedImage, setUploadedImage] = useState('');
@@ -147,10 +147,10 @@ const MyProfile = () => {
                     )}
                 </div>
             </div>
-            <div className="mt-12 text-center">
+            <div className="my-12 text-center">
                 <h1 className="mb-4 text-2xl font-bold text-gray-800">{user?.displayName}</h1>
                 <p className="text-gray-600 text-lg">{user.email}</p>
-                <p className="text-green-600 text-lg font-bold">Your Booking: {book.length}</p>
+                
                 
             </div>
         </div>

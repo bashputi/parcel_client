@@ -1,19 +1,47 @@
-
-import useBook from "../../hooks/useBook";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 
 const Allparcel = () => {
-    // const parcelData = useLoaderData();
-    // const [parcel, setParcel] = useState(parcelData);
-    const [book] = useBook();
-  // console.log(book)
+  const axiosPublic = useAxiosPublic();
+    const parcelData = useLoaderData();
+    const [parcels, setParcels] = useState(parcelData);
+
+ 
+    
+    const handleStatus = (user) => {
+      console.log(user)
+      axiosPublic
+        .patch(`/books/status/${user._id}`)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            const updatedStatus = parcels.map((item) =>
+              item._id === user._id ? { ...item, status: 'on the way' } : item
+            );
+            setParcels(updatedStatus);
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${user.name}'s status is change Now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error making status:", error);
+        });
+    };
+ 
     return (
-        <div>
+        <div className="mb-20">
              <div className="flex justify-evenly mt-12 mb-8">
       <div>
       
       <h1 className="text-4xl font-semibold text-gray-700">All Ordered Parcel</h1>
-      <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {book.length}</h2>
+      <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {parcels.length}</h2>
       </div>
       </div>
       <div className="overflow-x-auto ">
@@ -38,32 +66,33 @@ const Allparcel = () => {
           <tbody>
             {/* row  */}
            {
-            book.length && book.map((item, index) => (
-                <tr key={item._id}>
+            parcels.length && parcels.map((user, index) => (
+                <tr key={user._id}>
                 <th>
                  {index + 1}
                 </th>
                 <td>
-                  {item.name}
+                  {user.name}
                 </td>
                 <td>
-                  {item.phnno}
+                  {user.phnno}
                
                 </td>
             
                 <td>
-                    {item.time}
+                    {user.time}
                 </td>
                 <td>
-                    {item.date}
+                    {user.date}
                   
                 </td>
                 <td>
-                   {item.price}
+                   {user.price}
                 </td>
 
                 <td>
-                    {item.status}
+                
+                { user.status === 'pending' ? <button onClick={() => handleStatus(user)} className="btn btn-outline btn-warning">Pending</button> : <button  className="btn bg-orange-500 ">On The Way</button>} 
                 </td>
                 <td>
                     <button className="btn btn-outline btn-warning">Manage</button>

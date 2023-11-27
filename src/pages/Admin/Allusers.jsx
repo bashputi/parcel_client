@@ -1,4 +1,4 @@
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 
 
 const Allusers = () => {
-const axiosSecure = useAxiosSecure();
+const axiosPublic = useAxiosPublic();
 const loadedUsers = useLoaderData();
 
 const [mans, setMans] = useState(loadedUsers)
@@ -24,7 +24,7 @@ useEffect(() => {
 
 
 const handleMakeAdmin = (user) => {
-  axiosSecure
+  axiosPublic
     .patch(`/users/admin/${user._id}`)
     .then((res) => {
       if (res.data.modifiedCount > 0) {
@@ -46,7 +46,8 @@ const handleMakeAdmin = (user) => {
     });
 };
 const handleMakeDeliveryMan = (user) => {
-  axiosSecure
+  console.log(user)
+  axiosPublic
     .patch(`/users/deliveryman/${user._id}`)
     .then((res) => {
       if (res.data.modifiedCount > 0) {

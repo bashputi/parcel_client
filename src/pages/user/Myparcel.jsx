@@ -1,19 +1,19 @@
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-// import useBook from '../../hooks/useBook'; 
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { Link, useLoaderData } from 'react-router-dom';
-// import useAuth from '../../hooks/useAuth'; 
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthProvider';
 
 
 const Myparcel = () => {
         const axiosSecure = useAxiosSecure();
-        // const [book, refetch] = useBook();
+  
         const loadedMyOrder = useLoaderData();
+        console.log(loadedMyOrder)
         const [updateUser, setUpdateUser] = useState(loadedMyOrder);
-        const {user, loading} = useContext(AuthContext);
+        const {user} = useContext(AuthContext);
+        console.log(updateUser)
         
         useEffect(() => {
           if (loadedMyOrder && user?.email) {
@@ -23,7 +23,7 @@ const Myparcel = () => {
         }, [loadedMyOrder, user?.email]);
 
         
-     const totalPrice = updateUser.reduce((total, item) => total + item.price, 0);
+      const totalPrice = updateUser?.reduce((total, item) => total + item.price, 0);
 
      const handleDelete = id => {
         Swal.fire({
@@ -58,11 +58,13 @@ const Myparcel = () => {
         <div>
            
       <div className="flex justify-evenly mt-12 mb-8">
-        <h2 className="text-4xl">Item: {updateUser.length}</h2>
+        <h2 className="text-4xl">Item:</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
-        updateUser.length ? <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
-        :  <button disabled className="btn btn-primary">Pay</button>
+        updateUser?.length ?
+         <Link to="/dashboard/payment"> <button className="btn btn-primary">Pay</button></Link>
+         :
+         <button disabled className="btn btn-primary">Pay</button>
        }
       </div>
       <div className="overflow-x-auto ">
@@ -88,7 +90,7 @@ const Myparcel = () => {
           <tbody>
             {/* row  */}
            {
-            updateUser.length && updateUser.map((item, index) => (
+            updateUser?.length && updateUser.map((item, index) => (
                 <tr key={item._id}>
                 <th>
                  {index + 1}
@@ -114,12 +116,14 @@ const Myparcel = () => {
                    <button className='btn btn-success'>Review</button>
                 </td>
                 <td>
+                <button className='btn btn-warning' disabled={item.status !== 'pending'}>
                 <Link to={`/dashboard/updateItem/${item._id}`}>
-                    <button className='btn btn-warning'><FaEdit /></button>
+                    <FaEdit />
                     </Link>
+                    </button>
                 </td>
                 <td>
-                <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btb-lg"><FaTrashAlt className='text-red-600 w-5 h-5'/></button>
+                <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btb-lg"  disabled={item.status !== 'pending'}><FaTrashAlt className='text-red-600 w-5 h-5'/></button>
                 </td>
                 <td>
                 {item.status}

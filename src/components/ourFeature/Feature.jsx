@@ -26,10 +26,7 @@ const Feature = () => {
             </div>
 
 
-
-
-
-            <Statistics></Statistics>
+            <Statistics></Statistics>  
         </div>
     );
 };

@@ -1,9 +1,19 @@
-import useRole from "../../hooks/useRole";
+import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 
 
 const Deliveryman = () => {
-    const [role] = useRole();
-    console.log(role)
+  const loadedDeliveryman = useLoaderData();
+  const [ deliverys, setDeliverys] = useState(loadedDeliveryman);
+
+  useEffect(() => {
+    const filter = loadedDeliveryman.filter((item) => item.role ===  'deliveryman' );
+    setDeliverys(filter);
+  },[loadedDeliveryman])
+ 
+ 
+
     return (
         <div>
             <div>
@@ -12,7 +22,7 @@ const Deliveryman = () => {
            <div>
            
            <h1 className="text-4xl font-semibold text-gray-700">All Delivery Man</h1>
-           <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {role.length}</h2>
+           <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {deliverys.length}</h2>
            </div>
            </div>
            <div className="overflow-x-auto ">
@@ -32,7 +42,7 @@ const Deliveryman = () => {
                <tbody>
                  {/* row  */}
                 {
-                 role.length && role.map((item, index) => (
+                 deliverys.length && deliverys.map((item, index) => (
                      <tr key={item._id}>
                      <th>
                       {index + 1}
