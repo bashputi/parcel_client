@@ -143,9 +143,9 @@ const Myparcel = () => {
                   
                 </td>
                 <td>
-                   {/* <button disabled={item.status !== 'delivered'} className='btn btn-success'></button>  */}
+                 
                    {
-                item.status != 'delivered' && <div>
+                item.status === 'delivered' && <div>
                    <button
               onClick={() => {
                 document.getElementById('my_modal_3').showModal();
