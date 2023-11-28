@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 import Google from './Google';
 import { MenuItem } from '@mui/material';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 
 // const defaultTheme = createTheme();
@@ -69,7 +70,13 @@ console.log(formData)
   };
   
 
-  return (
+  return (<>
+
+<Helmet>
+                <meta charSet="utf-8" />
+                <title>PAKEED | Register </title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
    
       <Container component="main" maxWidth="xs">
         <Paper sx={{ px: '30px' }} elevation={16} >
@@ -199,6 +206,7 @@ console.log(formData)
       <Google></Google>
       </Paper>
       </Container>
+      </>
  
   );
 }

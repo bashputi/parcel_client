@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import Google from './Google';
 import { Paper } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Helmet } from 'react-helmet';
 
 
 export default function Login() {
@@ -46,6 +47,12 @@ export default function Login() {
   
 
   return (
+    <>
+    <Helmet>
+                <meta charSet="utf-8" />
+                <title>PAKEED | Login </title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
       <Container component="main" maxWidth="xs">
         <Paper sx={{ px: '30px' }} elevation={16} >
         <CssBaseline />
@@ -109,6 +116,6 @@ export default function Login() {
       <Google />
       </Paper>
       </Container>
- 
+ </>
   );
 }

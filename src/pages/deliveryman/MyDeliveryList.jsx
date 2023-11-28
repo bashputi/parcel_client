@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import useOrder from "../../hooks/useOrder";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import SectionTitle from "../../components/SectionTitle";
 
 
 const MyDeliveryList = () => {
@@ -16,7 +17,7 @@ const MyDeliveryList = () => {
     }, [loadedList]);
 
     const filter = lists.filter((item) => item.deliverymanid === firstMatchingItemId);
-    console.log(filter);
+  
 
     const handleStatus = (item) => {
         
@@ -101,9 +102,9 @@ const MyDeliveryList = () => {
 
     return (
         <div>
-           
+           <SectionTitle heading={'All Assigned task'} subHeading={'... Work For You...'}></SectionTitle>
       <div className="flex justify-evenly mt-12 mb-8">
-        <h2 className="text-4xl">Item:</h2>
+        
         
      
       </div>
