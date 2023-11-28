@@ -96,7 +96,8 @@ const myRouter = createBrowserRouter([
             },
             {
                path: 'mydeliverylist' ,
-               element: <MyDeliveryList></MyDeliveryList>
+               element: <MyDeliveryList></MyDeliveryList>,
+               loader: () => fetch('http://localhost:5002/books')
             },
             {
                path: 'myreview' ,

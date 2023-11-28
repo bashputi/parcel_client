@@ -5,10 +5,7 @@ const useDelivery = () => {
     const [deliveryman, setDeliveryman] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    console.log(deliveryman)
-
     const filter = deliveryman.filter((item) => item.role === 'deliveryman')
-    console.log(filter);
     
     useEffect(() => {
         fetch('http://localhost:5002/users')

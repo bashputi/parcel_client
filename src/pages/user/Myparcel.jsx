@@ -1,5 +1,5 @@
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt} from "react-icons/fa";
 import Swal from 'sweetalert2';
 import { Link, useLoaderData } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
@@ -58,7 +58,6 @@ const Myparcel = () => {
         <div>
            
       <div className="flex justify-evenly mt-12 mb-8">
-        <h2 className="text-4xl">Item:</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
         updateUser?.length ?
@@ -103,26 +102,26 @@ const Myparcel = () => {
                
                 </td>
                 <td>
-                    {/* aproximate date  */}
+                    {item.deliverydate }
                 </td>
                 <td>
                     {item.time}
                 </td>
                 <td>
-                    {/* deliveryman id  */}
+                    {item.deliverymanid}
                   
                 </td>
                 <td>
                    <button className='btn btn-success'>Review</button>
                 </td>
                 <td>
+                <button disabled={item.status !== 'pending'} className='btn btn-warning'>
                 <Link to={`/dashboard/updateItem/${item._id}`}>
-                <button className='btn btn-warning'>
+               
                 
-                    <FaEdit />Update
-                  
-                    </button> 
+                   Update
                      </Link>
+                     </button> 
                 
                 </td>
                 <td>

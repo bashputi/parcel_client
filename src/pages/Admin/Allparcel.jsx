@@ -12,30 +12,6 @@ const Allparcel = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
 
     const [filter] = useDelivery();
-    
-    const handleStatus = (user) => {
-      console.log(user)
-      axiosPublic
-        .patch(`/books/status/${user._id}`)
-        .then((res) => {
-          if (res.data.modifiedCount > 0) {
-            const updatedStatus = parcels.map((item) =>
-              item._id === user._id ? { ...item, status: 'on the way' } : item
-            );
-            setParcels(updatedStatus);
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `${user.name}'s status is change Now!`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        })
-        .catch((error) => {
-          console.error("Error making status:", error);
-        });
-    };
 
     const handleAssign = (e) => {
       e.preventDefault();
@@ -43,11 +19,12 @@ const Allparcel = () => {
       const approximateDate = formData.get('data'); 
       const deliveryManId = formData.get('man');
       const UserId = formData.get('text');
-  console.log(approximateDate, deliveryManId, UserId);
+  console.log(deliveryManId, UserId);
 
   const updateItem = {
     deliverydate: approximateDate,
-    deliverymanid: deliveryManId
+    deliverymanid: deliveryManId,
+    status: 'on the way'
   }
 
   axiosPublic
@@ -63,6 +40,7 @@ const Allparcel = () => {
           showConfirmButton: false,
           timer: 1500
         });
+        
     }
   })
   .catch((error) => {
@@ -93,9 +71,6 @@ const Allparcel = () => {
               <th>Booking Date</th>
               <th>Requested Delivery Date</th>
               <th>Cost</th>
-            
-        
-              <th>Status</th>
               <th>Manage</th>
             </tr>
           </thead>
@@ -127,10 +102,6 @@ const Allparcel = () => {
                 </td>
 
                 <td>
-                
-                { user.status === 'pending' ? <button onClick={() => handleStatus(user)} className="btn btn-outline btn-warning">Pending</button> : <button  className="btn bg-orange-500 ">On The Way</button>} 
-                </td>
-                <td>
                  
                {
                 user.status === 'pending' ? <div>
@@ -140,12 +111,12 @@ const Allparcel = () => {
                 setSelectedUserId(user._id);
               }}
               className="btn btn-outline btn-warning"
-            >Manage</button>
+            >Manage Order</button>
                 <dialog id="my_modal_3" className="modal">
                   <div className="modal-box">
 
                  <div className="flex justify-end">
-                 <button onClick={() => document.getElementById('my_modal_3').close()} className="btn btn-warning">Close</button>
+                 <button onClick={() => document.getElementById('my_modal_3').close(window.location.reload())} className="btn btn-warning">Close</button>
                  </div>
 
                   <form onSubmit={ handleAssign}>
@@ -160,6 +131,12 @@ const Allparcel = () => {
                       <span className="label-text">Approximate Date</span>
                     </label>
                     <input type="date" name="data" className="input input-bordered max-w-xs" required />
+                  </div>
+                    <div className="form-control mt-5">
+                    <label className="label">
+                      <span className="label-text">Change Status</span>
+                    </label>
+                    <input type="text" readOnly name="status" placeholder="On The Way" className="input input-bordered max-w-xs" required />
                   </div>
                   <div className="form-control my-5">
                   <label className="label">
@@ -180,7 +157,7 @@ const Allparcel = () => {
                 </div>
                 :
                 <>
-                <p>managed</p>
+                <button className="btn btn-success">Managed</button>
                 </>
                }
                     

@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import auth from "./firebase/firebase.config";
 import useAxiosPublic from "../src/hooks/useAxiosPublic";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
@@ -27,17 +27,15 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
-
-    const handleUpdateProfile = (name, photo) => {
-        console.log(auth.currentUser);
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        })
-    };
-
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
+    };
+
+    const handleUpdateProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
     };
 
     useEffect (() => {
@@ -60,7 +58,7 @@ const AuthProvider = ({ children }) => {
            
         });
         return () => {
-            unSubscribe();
+             return unSubscribe();
         }
     }, [axiosPublic])
 
@@ -69,9 +67,10 @@ const AuthProvider = ({ children }) => {
         loading,
         signUp,
         signIn,
+        logOut,
         googleSignIn,
         handleUpdateProfile,
-        logOut
+       
     };
 
     return (
@@ -83,6 +82,3 @@ const AuthProvider = ({ children }) => {
 
 export default AuthProvider;
 
-AuthProvider.propTypes = {
-    children: PropTypes.node
-}
