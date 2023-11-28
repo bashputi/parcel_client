@@ -116,11 +116,14 @@ const Myparcel = () => {
                    <button className='btn btn-success'>Review</button>
                 </td>
                 <td>
-                <button className='btn btn-warning' disabled={item.status !== 'pending'}>
                 <Link to={`/dashboard/updateItem/${item._id}`}>
-                    <FaEdit />
-                    </Link>
-                    </button>
+                <button className='btn btn-warning'>
+                
+                    <FaEdit />Update
+                  
+                    </button> 
+                     </Link>
+                
                 </td>
                 <td>
                 <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btb-lg"  disabled={item.status !== 'pending'}><FaTrashAlt className='text-red-600 w-5 h-5'/></button>

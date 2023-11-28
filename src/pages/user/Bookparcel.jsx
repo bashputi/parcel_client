@@ -33,6 +33,7 @@ const Bookparcel = () => {
       
         calculatePrice();
       }, [weight]);
+     
 
       const calculatePrice = (numericWeight) => {
         let calculatedPrice = 0;
@@ -52,7 +53,7 @@ const Bookparcel = () => {
         const parsedWeight = parseInt(data.weight);
         const calculatedPrice = calculatePrice(parsedWeight);
 
-        data.weight = isNaN(parsedWeight) ? 0 : parsedWeight;
+        data.weight = parsedWeight;
         data.price = calculatedPrice;
 
         const currentDate = new Date(); 
@@ -75,7 +76,7 @@ const Bookparcel = () => {
             receivername: data.receivername,
             receiverphnno: data.receivername,
             type: data.type,
-            weight: data.weigth,
+            weight: parsedWeight,
             status: 'pending'
           }
         

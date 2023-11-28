@@ -18,7 +18,6 @@ import MyReview from "../pages/deliveryman/MyReview";
 import UpdateItem from "../pages/user/UpdateItem";
 import Payment from "../pages/user/Payment";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
-import AdminRoute from "./AdminRoute";
 
 
 

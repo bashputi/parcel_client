@@ -5,7 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useProfile from "../../hooks/useProfile";
 import useAuth from "../../hooks/useAuth";
-import useBook from "../../hooks/useBook";
+
 
 
 
@@ -19,7 +19,7 @@ const MyProfile = () => {
     const inputRef = useRef(null);
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
-    console.log(user)
+
     const axiosSecure = useAxiosSecure();
     const [profile, refetch] = useProfile();
     const [uploadedImage, setUploadedImage] = useState('');

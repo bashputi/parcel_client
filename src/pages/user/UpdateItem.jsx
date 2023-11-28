@@ -8,13 +8,15 @@ import { useLoaderData } from "react-router-dom";
 
 
 const UpdateItem = () => {
-    const {address, date, latitude, longitude, phnno, receivername, receiverphnno, type, _id} = useLoaderData();
+    const {receiverphnno, address, date, latitude, longitude, phnno, receivername, type, _id} = useLoaderData();
+    
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const {user} = useAuth();
     const [weight, setWeight] = useState(0);
     const [price, setPrice] = useState(0);
-    
+
+
     useEffect(() => {
         const calculatePrice = () => {
           const numericWeight = parseInt(weight); 
@@ -51,12 +53,12 @@ const UpdateItem = () => {
     };
 
     const onSubmit = async (data) => {
-       
+       console.log(data.weight)
         const parsedWeight = parseInt(data.weight);
         const calculatedPrice = calculatePrice(parsedWeight);
 
-        data.weight = isNaN(parsedWeight) ? 0 : parsedWeight;
         data.price = calculatedPrice;
+        data.weight = parsedWeight;
 
           const updateItem = {
             address: data.address,
@@ -71,7 +73,7 @@ const UpdateItem = () => {
             receivername: data.receivername,
             receiverphnno: data.receivername,
             type: data.type,
-            weight: data.weigth,
+            weight: parsedWeight,
             status: 'pending'
           }
       
