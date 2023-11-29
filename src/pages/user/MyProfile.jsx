@@ -113,7 +113,7 @@ const MyProfile = () => {
 
     return (
         <div>
-            <SectionTitle heading={'My Profile'} subHeading={'Watch your history'}></SectionTitle>
+            <SectionTitle data-aos="zoom-in" data-aos-duration="2000" heading={'My Profile'} subHeading={'Watch your history'}></SectionTitle>
 
             <div>
                 <div className="flex justify-center mb-20">
@@ -147,7 +147,9 @@ const MyProfile = () => {
                     )}
                 </div>
             </div>
-            <div className="my-12 text-center">
+            <div data-aos="flip-left"
+                        data-aos-easing="ease-out-cubic"
+                        data-aos-duration="2000" className="my-12 text-center">
                 <h1 className="mb-4 text-2xl font-bold text-gray-800">{user?.displayName}</h1>
                 <p className="text-gray-600 text-lg">{user.email}</p>
                 

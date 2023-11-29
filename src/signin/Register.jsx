@@ -118,6 +118,7 @@ console.log(formData)
                   id="phn"
                   label="Phone No"
                   name="phn"
+                  type='number'
                   autoComplete="phone-no"
                   {...register("phn", { required: "Phone no is required"})}
                   error={Boolean(errors.phn)}
@@ -129,6 +130,7 @@ console.log(formData)
                   required
                   fullWidth
                   id="email"
+                  type="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"

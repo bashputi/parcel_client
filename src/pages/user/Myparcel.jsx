@@ -87,7 +87,7 @@ const Myparcel = () => {
      
     return (
         <div>
-            <SectionTitle heading={'All Booked Item'} subHeading={'Watch your history'}></SectionTitle>
+            <SectionTitle data-aos="zoom-in-up" data-aos-duration="2500" heading={'All Booked Item'} subHeading={'Watch your history'}></SectionTitle>
       <div className="flex justify-evenly mt-12 mb-8">
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
@@ -117,7 +117,7 @@ const Myparcel = () => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {/* row  */}
            {
             updateUser?.length && updateUser.map((item, index) => (

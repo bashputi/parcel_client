@@ -102,7 +102,7 @@ const MyDeliveryList = () => {
 
     return (
         <div>
-           <SectionTitle heading={'All Assigned task'} subHeading={'... Work For You...'}></SectionTitle>
+           <SectionTitle data-aos="zoom-in" data-aos-duration="2000" heading={'All Assigned task'} subHeading={'... Work For You...'}></SectionTitle>
       <div className="flex justify-evenly mt-12 mb-8">
         
         

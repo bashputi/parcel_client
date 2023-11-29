@@ -89,7 +89,7 @@ const CheckoutForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form data-aos="zoom-in" data-aos-duration="2000" onSubmit={handleSubmit}>
               <CardElement
         options={{
           style: {

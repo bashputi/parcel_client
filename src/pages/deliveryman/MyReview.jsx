@@ -19,7 +19,7 @@ const MyReview = () => {
 
     return (
         <div>
-            <SectionTitle heading={'Your Reviews'} subHeading={'...Keep Working Hard...'}></SectionTitle>
+            <SectionTitle data-aos="zoom-in" data-aos-duration="2000" heading={'Your Reviews'} subHeading={'...Keep Working Hard...'}></SectionTitle>
             
         </div>
     );

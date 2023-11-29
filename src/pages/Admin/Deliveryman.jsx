@@ -19,7 +19,7 @@ const Deliveryman = () => {
             <div>
            
            <div className="flex justify-evenly mt-12 mb-8">
-           <div>
+           <div data-aos="zoom-in" data-aos-duration="2000">
            
            <h1 className="text-4xl font-semibold text-gray-700">All Delivery Man</h1>
            <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {deliverys.length}</h2>
@@ -39,7 +39,8 @@ const Deliveryman = () => {
                    <th>Average Review</th>
                  </tr>
                </thead>
-               <tbody>
+               <tbody data-aos="fade-up"
+      data-aos-duration="2500">
                  {/* row  */}
                 {
                  deliverys.length && deliverys.map((item, index) => (

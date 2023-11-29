@@ -46,9 +46,9 @@ const Adminhome = () => {
   }, []);
 
   return (
-    <div>
-      <SectionTitle heading={'statistics'} subHeading={'Give focus on service'} />
-      <div className="App flex justify-center my-20">
+    <div >
+      <SectionTitle  heading={'statistics'} subHeading={'Give focus on service'} />
+      <div data-aos="zoom-in" data-aos-duration="2000" className="App flex justify-center my-20">
         <div className="chart">
           {chartData && chartData?.series && (
             <Chart

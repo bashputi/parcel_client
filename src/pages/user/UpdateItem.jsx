@@ -95,10 +95,10 @@ const UpdateItem = () => {
       };
 
     return (
-        <div className=''>
+        <div data-aos="zoom-in" data-aos-duration="2000" className=''>
           
-        <SectionTitle heading="Update the Item" subHeading="Don't think much"></SectionTitle>
-         <div>
+        <SectionTitle  heading="Update the Item" subHeading="Don't think much"></SectionTitle>
+         <div data-aos="zoom-in-up" data-aos-duration="2500">
      <form onSubmit={handleSubmit(onSubmit)}>
        <div className="form-control w-full my-6">
          <label className="label">

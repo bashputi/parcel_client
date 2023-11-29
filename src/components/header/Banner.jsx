@@ -2,7 +2,8 @@ import { FcSearch } from "react-icons/fc";
 
 const Banner = () => {
     return (
-        <div className="mt-16 gap-8 lg:flex">
+        <div  data-aos="fade-up"
+        data-aos-duration="2500" className="mt-16 gap-8 lg:flex">
            <img className="lg:w-2/3 lg:pl-5" src="https://i.ibb.co/Gt0fNcg/Screenshot-2023-11-25-084643.png" alt="banner" />
            <div className="flex justify-center items-center">
             <div>

@@ -23,7 +23,7 @@
 
 - Specific user can get there booked parcel. User can upload their profile picture and update it as much as they wish.
 
-- After successfull payment user can exprience confetti explotion. User can delete or update single parcel ony when the status is pending .
+- After successfull payment user can exprience confetti explotion. User can delete or update single parcel only when the status is pending .
 
 
 

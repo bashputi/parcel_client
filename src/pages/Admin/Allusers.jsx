@@ -72,7 +72,7 @@ const handleMakeDeliveryMan = (user) => {
     return (
         <div className="mb-10">
         <div className="flex justify-evenly mt-12 mb-8">
-       <div>
+       <div data-aos="zoom-in" data-aos-duration="2000">
        <h1 className="text-4xl font-semibold text-gray-700">All User</h1>
        <h2 className="text-2xl mt-5 text-center text-gray-700">Item: {mans.length}</h2>
        </div>
@@ -93,7 +93,8 @@ const handleMakeDeliveryMan = (user) => {
                 <th>Make Admin</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-aos="fade-up"
+      data-aos-duration="2500">
               {/* row  */}
              {
               mans.length && mans.map((user, index) => (

@@ -20,7 +20,7 @@ const Statistics = () => {
 
     return (
       
-        <div className="mt-12">
+        <div data-aos="flip-down" data-aos-duration="2000" className="mt-12">
         <h1 className="text-center mb-10 text-2xl font-semibold">Statistics of website</h1>
         <div className="flex justify-center gap-8">
             <div className="stats shadow">
