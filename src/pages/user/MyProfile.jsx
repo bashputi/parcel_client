@@ -112,13 +112,13 @@ const MyProfile = () => {
     };
 
     return (
-        <div>
-            <SectionTitle data-aos="zoom-in" data-aos-duration="2000" heading={'My Profile'} subHeading={'Watch your history'}></SectionTitle>
+        <div className="my-20 ">
+            <SectionTitle heading={'My Profile'} subHeading={'Watch your history'}></SectionTitle>
 
             <div>
-                <div className="flex justify-center mb-20">
+                <div data-aos="fade-down-right" data-aos-duration="2500" className="flex justify-center mb-20">
                     {uploadedImage ? (
-                        <img src={uploadedImage} className="w-64 rounded-full h-64" alt="user profile" />
+                        <img src={uploadedImage} className="w-64 mt-10 rounded-full h-64" alt="user profile" />
                     ) : (
                         <div>
                             <div className="w-64 bg-lime-200 rounded-full h-64"></div>
@@ -149,7 +149,7 @@ const MyProfile = () => {
             </div>
             <div data-aos="flip-left"
                         data-aos-easing="ease-out-cubic"
-                        data-aos-duration="2000" className="my-12 text-center">
+                        data-aos-duration="3000" className="my-12 text-center">
                 <h1 className="mb-4 text-2xl font-bold text-gray-800">{user?.displayName}</h1>
                 <p className="text-gray-600 text-lg">{user.email}</p>
                 

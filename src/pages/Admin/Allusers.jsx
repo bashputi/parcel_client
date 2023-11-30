@@ -17,7 +17,7 @@ const pages = [...Array(numberOfPage).keys()];
 const [currentPage, setCurrentPage] = useState(0);
 console.log(mans)
 useEffect(() => {
-  fetch(`https://parcel-delivery-server.vercel.app/users?page=${currentPage}&size=${itemsPerPage}`)
+  fetch(`http://localhost:5002/users?page=${currentPage}&size=${itemsPerPage}`)
       .then(res => res.json())
       .then(data => setMans(data))
 }, [currentPage]);
@@ -118,7 +118,9 @@ const handleMakeDeliveryMan = (user) => {
                   </td>
   
                   <td>
-                  { user.role === 'deliveryman' ? <button className="btn btn-outline btn-warning">Delivery Man</button> : <button onClick={() => handleMakeDeliveryMan(user)} className="btn bg-orange-500 btn-lg"><FaUsers className="text-white text-2xl" /></button>}
+                  { user.role === 'deliveryman' ? <button className="btn btn-outline btn-warning">
+                    Delivery Man</button> : <button onClick={() => handleMakeDeliveryMan(user)} className="btn bg-orange-500 btn-lg">
+                      <FaUsers className="text-white text-2xl" /></button>}
                   </td>
                   <td>
                   { user.role === 'admin' ? <button className="btn btn-outline btn-warning">Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 btn-lg"><FaUsers className="text-white text-2xl" /></button>}

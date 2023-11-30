@@ -8,7 +8,7 @@ const useDelivery = () => {
     const filter = deliveryman.filter((item) => item.role === 'deliveryman')
     
     useEffect(() => {
-        fetch('https://parcel-delivery-server.vercel.app/users')
+        fetch('http://localhost:5002/users')
             .then((res) => res.json())
             .then(data => {
     

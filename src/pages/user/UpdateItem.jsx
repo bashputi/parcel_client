@@ -95,7 +95,7 @@ const UpdateItem = () => {
       };
 
     return (
-        <div data-aos="zoom-in" data-aos-duration="2000" className=''>
+        <div data-aos="zoom-in" data-aos-duration="2000" className='my-20'>
           
         <SectionTitle  heading="Update the Item" subHeading="Don't think much"></SectionTitle>
          <div data-aos="zoom-in-up" data-aos-duration="2500">

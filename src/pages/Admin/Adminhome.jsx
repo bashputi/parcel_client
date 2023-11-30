@@ -7,7 +7,7 @@ const Adminhome = () => {
   
 
   useEffect(() => {
-    fetch('https://parcel-delivery-server.vercel.app/books')
+    fetch('http://localhost:5002/books')
       .then(res => res.json())
       .then(data => {
         console.log(data)

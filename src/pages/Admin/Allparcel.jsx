@@ -19,8 +19,7 @@ const Allparcel = () => {
       const approximateDate = formData.get('data'); 
       const deliveryManId = formData.get('man');
       const UserId = formData.get('text');
-  console.log(deliveryManId, UserId);
-
+ 
   const updateItem = {
     deliverydate: approximateDate,
     deliverymanid: deliveryManId,
@@ -120,7 +119,7 @@ const Allparcel = () => {
                  <button onClick={() => document.getElementById('my_modal_3').close(window.location.reload())} className="btn btn-warning">Close</button>
                  </div>
 
-                  <form onSubmit={ handleAssign}>
+                  <form onSubmit={handleAssign}>
                     <div className="form-control mt-5">
                     <label className="label">
                       <span className="label-text">User Id</span>

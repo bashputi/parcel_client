@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthProvider';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import SectionTitle from "../../components/SectionTitle";
+import { FcSearch } from "react-icons/fc";
 
 
 const Myparcel = () => {
@@ -13,6 +14,7 @@ const Myparcel = () => {
         const loadedMyOrder = useLoaderData();
         const [updateUser, setUpdateUser] = useState(loadedMyOrder);
         const {user} = useContext(AuthContext);
+        const [selectedUserId, setSelectedUserId] = useState(null);
         
         useEffect(() => {
           if (loadedMyOrder && user?.email) {
@@ -84,10 +86,22 @@ const Myparcel = () => {
 
 
     }
+
+    const handleSarch = (e) => {
+      e.preventDefault();
+      const parcel = e.target.parcel.value;
+      if ( parcel === "All") {
+         
+            setUpdateUser(loadedMyOrder);
+      } else {
+          const remaining = loadedMyOrder?.filter((item) => item.status === parcel);
+            setUpdateUser(remaining)
+      }
+   };
      
     return (
-        <div>
-            <SectionTitle data-aos="zoom-in-up" data-aos-duration="2500" heading={'All Booked Item'} subHeading={'Watch your history'}></SectionTitle>
+        <div className="my-20">
+            <SectionTitle heading={'All Booked Item'} subHeading={'Watch your history'}></SectionTitle>
       <div className="flex justify-evenly mt-12 mb-8">
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
        {
@@ -97,10 +111,32 @@ const Myparcel = () => {
          <button disabled className="btn btn-primary">Pay</button>
        }
       </div>
+
+    <div className="my-12 flex justify-center">
+            <form onSubmit={handleSarch}>
+            <div className="form-control join">
+            
+            <div className="join">
+            <select name="parcel"  className="select w-56 select-bordered">
+                <option value="All">All</option>
+                <option value="pending">Pending</option>
+                <option value="on the way">On The Way</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="delivered">Delivered</option>
+                </select>
+                <button className="btn join-item"> <FcSearch  className="h-8 w-8"/> </button>
+            </div>
+            
+            </div>
+            </form>
+            
+          </div>
+
+
       <div className="overflow-x-auto ">
         <table className="table w-full">
           {/* head */}
-          <thead>
+          <thead > 
             <tr>
               <th>
                 Serial No
@@ -117,7 +153,8 @@ const Myparcel = () => {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody >
+          <tbody data-aos="fade-up"
+      data-aos-duration="2500">
             {/* row  */}
            {
             updateUser?.length && updateUser.map((item, index) => (
@@ -149,7 +186,7 @@ const Myparcel = () => {
                    <button
               onClick={() => {
                 document.getElementById('my_modal_3').showModal();
-                // setSelectedUserId(user._id);
+                 setSelectedUserId(item.deliverymanid);
               }}
               className="btn btn-secondary "
             >Review</button>
@@ -177,7 +214,7 @@ const Myparcel = () => {
                     <label className="label">
                       <span className="label-text">Delivery Man ID</span>
                     </label>
-                    <input type="text" value={item.deliverymanid} name="ID" readOnly className="input input-bordered max-w-xs"/>
+                    <input type="text" value={selectedUserId || ''} name="ID" readOnly className="input input-bordered max-w-xs"/>
                   </div>
                   <div className="form-control my-5">
                   <label className="label">

@@ -14,10 +14,12 @@ import Google from './Google';
 import { Paper } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Helmet } from 'react-helmet';
+import { useState } from 'react';
 
 
 export default function Login() {
-
+  const [logInError, setLogInError] = useState('');
+  const [success, setSuccess] = useState('');
     const { signIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,6 +31,8 @@ export default function Login() {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    setLogInError('');
+    setSuccess('');
     signIn(email, password)
      .then(result => {
          const user = result.user;
@@ -42,12 +46,15 @@ export default function Login() {
          });
          navigate(from, { replace: true });
      })
+     .catch(error => {
+     setLogInError(error.message);
+  })
        
   };
   
 
   return (
-    <>
+    <div data-aos="zoom-in" data-aos-duration="3000" >
     <Helmet>
                 <meta charSet="utf-8" />
                 <title>PAKEED | Login </title>
@@ -96,6 +103,14 @@ export default function Login() {
                 />
                
               </Grid>
+              <div className='mt-5 ml-6'>
+              {
+        logInError && <p className="text-red-700">{logInError}</p>
+      }
+      {
+        success && <p className="text-green-600">{success}</p>
+      }
+              </div>
               
             </Grid>
             <Button
@@ -118,6 +133,7 @@ export default function Login() {
       <Google />
       </Paper>
       </Container>
- </>
+    
+ </div>
   );
 }

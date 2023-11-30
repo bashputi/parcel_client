@@ -24,6 +24,7 @@ import { Helmet } from 'react-helmet';
 // const defaultTheme = createTheme();
 
 export default function Register() {
+  
   const [role, setRole] = useState('');
     const axiosPublic = useAxiosPublic();
     const { signUp, handleUpdateProfile } = useAuth();
@@ -70,7 +71,7 @@ console.log(formData)
   };
   
 
-  return (<>
+  return (<div data-aos="zoom-in" data-aos-duration="3000" >
 
 <Helmet>
                 <meta charSet="utf-8" />
@@ -148,7 +149,13 @@ console.log(formData)
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  {...register("password", { required: true, minLength: 6})}
+                  {...register("password", { required: true,
+                     minLength: 6,
+                     pattern: {
+                      value: /^(?=.*[A-Z]).*$/,
+                      message: "Password must contain at least one capital letter",
+                    },
+                    })}
                   error={Boolean(errors.password)}
                   helperText={errors.password?.message}
                 />
@@ -180,8 +187,13 @@ console.log(formData)
                   id="role"
                   autoComplete="role"
                   value={role}
+                  {...register("role", { required: "role is required"})}
+                  error={Boolean(errors.role)}
+                  helperText={errors.role?.message}
                   onChange={handleRoleChange}
-                  select>
+                  select
+                 
+                  >
                 <MenuItem value="commoner">User</MenuItem>
                 <MenuItem value="deliveryman">Delivery man</MenuItem>
                 </TextField>
@@ -208,7 +220,7 @@ console.log(formData)
       <Google></Google>
       </Paper>
       </Container>
-      </>
+      </div>
  
   );
 }

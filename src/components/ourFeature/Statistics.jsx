@@ -26,7 +26,7 @@ const Statistics = () => {
             <div className="stats shadow">
                 <div className="stat place-items-center">
                     <div className="stat-title">Users</div>
-                    <div className="stat-value">
+                    <div className="stat-value text-secondary">
                    
                      <CountUp start={0} end={stats?.users || 0} duration={12} />
                   
@@ -34,17 +34,17 @@ const Statistics = () => {
                 </div>
 
                 <div className="stat  text-white font-bold place-items-center">
-                    <div className="stat-title">Delivered</div>
+                    <div className="stat-title">Reveiws</div>
                     <div className="stat-value text-secondary">
                        
-                      <CountUp start={0} end={4} duration={12} />
+                      <CountUp start={0} end={stats?.review} duration={7} />
                        
                     </div>
                 </div>
 
                 <div className="stat place-items-center">
                     <div className="stat-title">Booked</div>
-                    <div className="stat-value">
+                    <div className="stat-value text-secondary">
                        
                         <CountUp start={0} end={stats?.bookItems || 0} duration={12} />
                        

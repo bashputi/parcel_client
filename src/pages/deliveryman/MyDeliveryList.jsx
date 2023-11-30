@@ -160,6 +160,7 @@ const MyDeliveryList = () => {
                 {item.longitude }{item.latitude }
                 
                 </td>
+               
                 <td>
                 { item.status === 'on the way' ? <button onClick={() => handleStatus(item)} disabled={item.status === 'delivered'} className="btn btn-outline btn-warning">Task Given</button> : <button disabled={item.status === 'delivered'} className="btn bg-orange-500 ">Canceled</button>} 
                

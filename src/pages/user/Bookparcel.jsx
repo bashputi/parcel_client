@@ -97,7 +97,7 @@ const Bookparcel = () => {
       };
 
     return (
-        <div className='my-10'>
+        <div className='my-10 mt-28'>
           
            <SectionTitle data-aos="zoom-in" data-aos-duration="2000" heading="book a parcel" subHeading="What's new?"></SectionTitle>
             <div data-aos="zoom-in-up" data-aos-duration="2500" className='mt-12 bg-lime-200 shadow-lg rounded-lg p-5'>
