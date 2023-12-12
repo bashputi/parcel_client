@@ -9,7 +9,7 @@ const useOrder = () => {
     const [firstMatchingItemId, setFirstMatchingItemId] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5002/users')
+        fetch('https://parcel-delivery-server.vercel.app/users')
             .then((res) => res.json())
             .then(data => {
                 setOrderlists(data);

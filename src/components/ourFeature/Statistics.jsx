@@ -16,7 +16,7 @@ const Statistics = () => {
             return res.data;
         }
     })
-    console.log(stats)
+  
 
     return (
       
@@ -37,7 +37,7 @@ const Statistics = () => {
                     <div className="stat-title">Reveiws</div>
                     <div className="stat-value text-secondary">
                        
-                      <CountUp start={0} end={stats?.review} duration={7} />
+                      <CountUp start={0} end={stats?.review || 0} duration={7} />
                        
                     </div>
                 </div>
