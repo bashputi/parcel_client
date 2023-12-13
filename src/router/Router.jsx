@@ -54,17 +54,17 @@ const myRouter = createBrowserRouter([
       {
         path: "allusers",
         element: <Allusers></Allusers>,
-        loader: () => fetch("https://parcel-delivery-server.vercel.app/users"),
+        loader: () => fetch("http://localhost:5002/users"),
       },
       {
         path: "allparcel",
         element: <Allparcel></Allparcel>,
-        loader: () => fetch("https://parcel-delivery-server.vercel.app/books"),
+        loader: () => fetch("http://localhost:5002/books"),
       },
       {
         path: "deliveryman",
         element: <Deliveryman></Deliveryman>,
-        loader: () => fetch("https://parcel-delivery-server.vercel.app/users"),
+        loader: () => fetch("http://localhost:5002/users"),
       },
       {
         path: "bookparcel",
@@ -73,13 +73,13 @@ const myRouter = createBrowserRouter([
       {
         path: "myparcel",
         element: <Myparcel></Myparcel>,
-        loader: () => fetch("https://parcel-delivery-server.vercel.app/books"),
+        loader: () => fetch("http://localhost:5002/books"),
       },
       {
         path: "updateItem/:id",
         element: <UpdateItem></UpdateItem>,
         loader: ({ params }) =>
-          fetch(`https://parcel-delivery-server.vercel.app/books/${params.id}`),
+          fetch(`http://localhost:5002/books/${params.id}`),
       },
       {
         path: "payment",
@@ -96,13 +96,13 @@ const myRouter = createBrowserRouter([
       {
         path: "mydeliverylist",
         element: <MyDeliveryList></MyDeliveryList>,
-        loader: () => fetch("https://parcel-delivery-server.vercel.app/books"),
+        loader: () => fetch("http://localhost:5002/books"),
       },
       {
         path: "myreview",
         element: <MyReview></MyReview>,
         loader: () =>
-          fetch("https://parcel-delivery-server.vercel.app/ratings"),
+          fetch("http://localhost:5002/ratings"),
       },
     ],
   },

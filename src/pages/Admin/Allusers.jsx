@@ -17,7 +17,7 @@ const pages = [...Array(numberOfPage).keys()];
 const [currentPage, setCurrentPage] = useState(0);
 console.log(mans)
 useEffect(() => {
-  fetch(`https://parcel-delivery-server.vercel.app/users?page=${currentPage}&size=${itemsPerPage}`)
+  fetch(`http://localhost:5002/users?page=${currentPage}&size=${itemsPerPage}`)
       .then(res => res.json())
       .then(data => setMans(data))
 }, [currentPage]);
